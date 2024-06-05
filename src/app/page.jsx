@@ -7,8 +7,10 @@ const Home = () => {
                 <h1 className="text-7xl font-bold">Creative Thoughts.. Agency</h1>
                 <p className="text-sm mt-8 mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias accusamus provident, enim incidunt dolore recusandae ipsa qui consequatur minus, nobis ullam sit vero laudantium. Esse fugiat alias eveniet quo magni.</p>
                 <div className="flex gap-4">
-                <button className="w-[120px] h-[55px] bg-blue-400 rounded-lg p-2 hover:shadow-lg hover:shadow-blue-400/50">Learn More</button>
-                <button className="w-[120px] h-[55px] bg-white rounded-lg text-black p-2 hover:shadow-lg hover:shadow-white/50">Contact</button>
+                <button className="w-[120px] h-[55px] bg-blue-400 rounded-lg p-2 hover:shadow-lg hover:shadow-blue-400/50">Learn 
+                More</button>
+                <button className="w-[120px] h-[55px] bg-white rounded-lg text-black p-2 hover:shadow-lg hover:shadow-white/50">
+                    Contact</button>
                 </div>
             </div>
             <div className="relative h-[500px] flex-1">

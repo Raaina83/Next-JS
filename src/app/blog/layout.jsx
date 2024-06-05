@@ -1,8 +1,8 @@
 const Bloglayout = ({children}) => {
     return (
-        <div>
+        <>
             {children}
-        </div>
+        </>
     )
 }
 
