@@ -1,6 +1,7 @@
 import Image from "next/image"
 
-const SinglePostPage = () => {
+const SinglePostPage = ({params}) => {
+    console.log(params)
     return (
         <div className="flex gap-[80px]">
             <div className="flex-1 relative h-[calc(100vh-170px)]">
