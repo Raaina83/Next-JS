@@ -13,7 +13,7 @@ const PostCard = ({post}) => {
         <div className="flex flex-col">
             <h2 className=" text-md font-bold">{post.title}</h2>
             <p className="text-sm text-gray-500">{post.body}</p>
-            <Link href={"/blog/post"}>Read more...</Link>
+            <Link href={`/blog/${post.id}`}>Read more...</Link>
         </div>
     </div>
   )

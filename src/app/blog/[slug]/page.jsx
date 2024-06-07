@@ -1,7 +1,24 @@
+import PostUser from "@/components/postUser/postUser"
+import { getSinglePost } from "@/lib/data"
 import Image from "next/image"
+import { Suspense } from "react"
 
-const SinglePostPage = ({params}) => {
-    console.log(params)
+//FETCH DATA WITH AN API
+// const getPost = async(slug) => {
+//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
+
+//     if(!res.ok) throw new Error("Something wen wrong")
+
+//     return res.json()
+// }
+
+const SinglePostPage = async({params}) => {
+    const {slug} = params
+    // const post = await getPost(slug)
+    const post = await getSinglePost(slug)
+    console.log(post)
+
+    console.log("params",params)
     return (
         <div className="flex gap-[80px]">
             <div className="flex-1 relative h-[calc(100vh-170px)]">
@@ -10,23 +27,19 @@ const SinglePostPage = ({params}) => {
             </div>
 
             <div className="flex-[2_1_0%] gap-4 flex flex-col">
-                <h1 className="text-2xl font-semibold">Title</h1>
+                <h1 className="text-2xl font-semibold">{post?.title}</h1>
                 <div className="flex gap-[20px] h-[50px]">
                     <Image src={"https://images.pexels.com/photos/678783/pexels-photo-678783.jpeg"} alt=""
                         width={50}
                         height={50}
                         className=" rounded-[50%] object-cover"/>
-                    <div className="flex flex-col">
-                        <span>Author</span>
-                        <span>Raaina</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <span>Published</span>
-                        <span>01.06.2022</span>
-                    </div>
+                    
+                    {post && <Suspense fallback={<div>Loading...</div>}>
+                    <PostUser userId={post?.userId}/>
+                    </Suspense>}
                 </div>
                 <div>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae culpa soluta ullam, exercitationem qui error quas itaque, eum temporibus ex dolor, quo nam! Quod molestias et dicta amet. Qui, aperiam.
+                    {post?.body}
                 </div>
             </div>
         </div>
