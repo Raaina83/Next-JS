@@ -1,6 +1,16 @@
-const LoginPage = () => {
+import { handleGithubLogin } from "@/lib/action"
+import { auth } from "@/lib/auth"
+
+const LoginPage = async() => {
+    const session = await auth()
+    console.log("login session",session)
+
     return (
-        <div>Login Page</div>
+        <div>
+            <form action={handleGithubLogin}>
+                <button type="submit">Sign in with github</button>
+            </form>
+        </div>
     )
 }
 

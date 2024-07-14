@@ -1,5 +1,6 @@
 "use client"
 
+import { handleLogout } from "@/lib/action"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -28,16 +29,18 @@ const Links = () => {
             title: "Blog",
             path: "/blog"
         },
-        {
-            title: "Admin",
-            path: "/admin"
-        },
-        {
-            title: "Logout",
-            path: "/logout"
-        }
+        // {
+        //     title: "Admin",
+        //     path: "/admin"
+        // },
+        // {
+        //     title: "Logout",
+        //     path: "/logout"
+        // }
         
     ]
+    const session = true
+    const isAdmin = true
   return (
     <>
         <div className="hidden md:flex md:items-center md:justify-between md:w-[70%] lg:w-[50%]">
@@ -49,6 +52,20 @@ const Links = () => {
                 >{link.title}
             </Link>
         ))}
+
+        {session ? (
+            <>
+            {isAdmin && <Link href={"/admin"} className={`${linkClass} ${pathName === "/admin" && "bg-white rounded-full text-black"} `}>Admin</Link>}
+            <form action={handleLogout} href="/logout">
+                <button className={`${linkClass} ${pathName === "/logout" && "bg-white rounded-full text-black"} `}>Logout</button>
+            </form>
+            </>
+        ): (
+            <Link href={"/logout"} className={`${linkClass} ${pathName === "/logout" && "bg-white rounded-full text-black"} `}>
+                Logout
+            </Link>
+        )}
+
         </div>
          <button onClick={() => setOpen((prev) => !prev)} className="block md:hidden absolute right-8">Menu</button>
 

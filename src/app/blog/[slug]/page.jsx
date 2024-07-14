@@ -4,36 +4,39 @@ import Image from "next/image"
 import { Suspense } from "react"
 
 //FETCH DATA WITH AN API
-// const getPost = async(slug) => {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
+const getPost = async(slug) => {
+    const res = await fetch(`http://localhost:3000/api/blog/${slug}`)
 
-//     if(!res.ok) throw new Error("Something wen wrong")
+    if(!res.ok) throw new Error("Something went wrong")
 
-//     return res.json()
-// }
+    return res.json()
+}
+
+export const generateMetadata = async({params}) => {
+    const { slug } = params
+    const post = await getSinglePost(slug) //nextjs will only fetch post once even though we have written it twice!
+
+    return {
+        title: post?.title,
+        description: post?.description
+    }
+}
 
 const SinglePostPage = async({params}) => {
     const {slug} = params
-    // const post = await getPost(slug)
-    const post = await getSinglePost(slug)
-    console.log(post)
+    const post = await getPost(slug)
+    // const post = await getSinglePost(slug)
 
-    console.log("params",params)
     return (
         <div className="flex gap-[80px]">
             <div className="flex-1 relative h-[calc(100vh-170px)]">
-                <Image src={"https://images.pexels.com/photos/17853183/pexels-photo-17853183/free-photo-of-close-up-of-wet-light-pink-roses-in-a-garden-after-rain.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} fill alt=""
+                <Image src={post.img} fill alt=""
                 className=" object-cover"/>
             </div>
 
             <div className="flex-[2_1_0%] gap-4 flex flex-col">
                 <h1 className="text-2xl font-semibold">{post?.title}</h1>
                 <div className="flex gap-[20px] h-[50px]">
-                    <Image src={"https://images.pexels.com/photos/678783/pexels-photo-678783.jpeg"} alt=""
-                        width={50}
-                        height={50}
-                        className=" rounded-[50%] object-cover"/>
-                    
                     {post && <Suspense fallback={<div>Loading...</div>}>
                     <PostUser userId={post?.userId}/>
                     </Suspense>}
